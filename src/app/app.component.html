@@ -1,5 +1,7 @@
-<!-- componente filho é button.component.html -->
-<!-- para enviar dados para @Input basta colocar entre '[]' -->
-<!-- para receber eventos de @Output basta colocar entre '()' -->
-<app-button [text]="'Adquirir'" [style]="'white'" (clicked)="buttonClicked()"></app-button>
-<app-button [text]="'Adquirir2'" [style]="'purple'" [disabled]="true"></app-button>
+<div class="cards-container">
+  <app-card [planType]="'Simples'" [planPrice]="100" [cardStyle]="'orange'"
+    (buttonClicked)="onCardButtonClicked()"></app-card>
+
+  <app-card [planType]="'Completo'" [planPrice]="250" [cardStyle]="'purple'"
+    (buttonClicked)="onCardButtonClicked()"></app-card>
+</div>

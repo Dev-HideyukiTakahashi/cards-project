@@ -1,0 +1,9 @@
+<div class="card card--purple" [class]="{
+  'card--orange': cardStyle === 'orange' ? true : false,
+  'card--purple': cardStyle === 'purple' ? true : false,
+}">
+  <div class="card__plan card__item">Plano <b>{{planType}}</b></div>
+  <div class="card__plan card__item">R${{planPrice}},00/Mês</div>
+  <app-button [text]="'Adquirir'" [style]="cardStyle === 'orange' ? 'white' : 'purple'" (clicked)="onButtonClicked()">
+  </app-button>
+</div>
