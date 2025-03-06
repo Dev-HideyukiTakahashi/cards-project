@@ -5,3 +5,9 @@
   <app-card [planType]="'Completo'" [planPrice]="250" [cardStyle]="'purple'"
     (buttonClicked)="onCardButtonClicked()"></app-card>
 </div>
+
+
+<!-- Two way data binding / input e output no ngmodel-->
+<h1>Nome:</h1>
+<input type="text" [(ngModel)]="name">
+<h1>Nome digitado: {{ name }}</h1>

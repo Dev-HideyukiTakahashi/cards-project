@@ -11,4 +11,6 @@ export class AppComponent {
   onCardButtonClicked() {
     console.log('onCardButtonClicked')
   }
+
+  name: string = 'Maria';
 }
