@@ -1,31 +1,64 @@
 <div class="cards-container">
-  <app-card [planType]="'Simples'" [planPrice]="100" [cardStyle]="'orange'"
-    (buttonClicked)="onCardButtonClicked()"></app-card>
+  <app-card
+    [planType]="'Simples'"
+    [planPrice]="100"
+    [cardStyle]="'orange'"
+    (buttonClicked)="onCardButtonClicked()"
+  ></app-card>
 
-  <app-card [planType]="'Completo'" [planPrice]="250" [cardStyle]="'purple'"
-    (buttonClicked)="onCardButtonClicked()"></app-card>
+  <app-card
+    [planType]="'Completo'"
+    [planPrice]="250"
+    [cardStyle]="'purple'"
+    (buttonClicked)="onCardButtonClicked()"
+  ></app-card>
 </div>
-
 
 <!-- Two way data binding / input e output no ngmodel-->
 <h1>Nome:</h1>
-<input type="text" [(ngModel)]="name">
+<input type="text" [(ngModel)]="name" />
 <h1>Nome digitado: {{ name }}</h1>
 
 <!-- NgIf -->
-<hr>
+<hr />
 <h1>NgIf</h1>
-<div style="background-color: green;" *ngIf="minhaProp; else meuTemplate">Sou uma div</div>
+<div style="background-color: green" *ngIf="minhaProp; else meuTemplate">
+  Sou uma div
+</div>
 <ng-template #meuTemplate>
-  <div style="background-color: red;">Sou uma div no template</div>
+  <div style="background-color: red">Sou uma div no template</div>
 </ng-template>
 <button (click)="toggleProp()">Toggle</button>
 
 <ng-template #meuTemplate2>
-  <div style="background-color: blue;">Meu template no then</div>
+  <div style="background-color: blue">Meu template no then</div>
 </ng-template>
 <ng-template #meuTemplate3>
-  <div style="background-color: purple;">Meu template no else</div>
+  <div style="background-color: purple">Meu template no else</div>
 </ng-template>
-<ng-container *ngIf="minhaProp2; then meuTemplate2; else meuTemplate3"></ng-container>
+<ng-container
+  *ngIf="minhaProp2; then meuTemplate2; else meuTemplate3"
+></ng-container>
 <button (click)="toggleContainer()">Toggle Container</button>
+
+<!-- NgFor -->
+<hr />
+<h1>NgFor</h1>
+<div class="list">
+  <div
+    class="item"
+    *ngFor="
+      let person of listPeople;
+      let i = index;
+      let isOdd = odd;
+      let isLast = last
+    "
+    [class.item--odd]="isOdd"
+    [class.item--highlighted]="personSelectedIndex === i"
+    (click)="selectPerson(i)"
+  >
+    <p class="item__name">{{ i }} - {{ person.name }}</p>
+    <p class="item__age">{{ person.age }} anos</p>
+    <p class="item__age" *ngIf="isLast">Último item</p>
+  </div>
+</div>
