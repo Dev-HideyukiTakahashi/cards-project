@@ -1,59 +1,175 @@
-# CardsProject
+# 📌 Componentes no Angular
 
-This project was generated using [Angular CLI](https://github.com/angular/angular-cli) version 19.2.0.
+## 📌 O que é um Componente?
 
-## Development server
+- Um **componente** é a unidade básica de construção de uma aplicação Angular.
+- Ele é composto por três partes principais:
+  - **Template (HTML):** Define a interface do usuário.
+  - **Style (CSS/SCSS):** Define os estilos do componente.
+  - **Classe (TypeScript):** Contém a lógica do componente.
 
-To start a local development server, run:
+## 📌 Criando um Componente
 
-```bash
-ng serve
+Para criar um componente no Angular, use o **Angular CLI**:
+
+```sh
+ng generate component nome-do-componente
+# ou
+ng g c nome-do-componente
 ```
 
-Once the server is running, open your browser and navigate to `http://localhost:4200/`. The application will automatically reload whenever you modify any of the source files.
+Isso criará uma pasta com os seguintes arquivos:
 
-## Code scaffolding
+- `nome-do-componente.component.ts` → Lógica do componente
+- `nome-do-componente.component.html` → Template
+- `nome-do-componente.component.css/scss` → Estilos
+- `nome-do-componente.component.spec.ts` → Testes
 
-Angular CLI includes powerful code scaffolding tools. To generate a new component, run:
+## 📌 Estrutura de um Componente
 
-```bash
-ng generate component component-name
+Exemplo de um componente básico:
+
+```ts
+import { Component } from "@angular/core";
+
+@Component({
+  selector: "app-exemplo",
+  templateUrl: "./exemplo.component.html",
+  styleUrls: ["./exemplo.component.css"],
+})
+export class ExemploComponent {
+  titulo: string = "Olá, Angular!";
+
+  exibirMensagem() {
+    alert("Mensagem do componente!");
+  }
+}
 ```
 
-For a complete list of available schematics (such as `components`, `directives`, or `pipes`), run:
+## 📌 Adicionando um Componente no Template
 
-```bash
-ng generate --help
+Para usar um componente em outro template, utilize o **seletor** definido no `@Component`:
+
+```html
+<app-exemplo></app-exemplo>
 ```
 
-## Building
+## 📌 Interpolação e Property Binding
 
-To build the project run:
+- **Interpolação (`{{ }}`)** → Exibe valores no template.
+- **Property Binding (`[propriedade]`)** → Passa valores para atributos do HTML.
 
-```bash
-ng build
+```html
+<h1>{{ titulo }}</h1>
+<button [disabled]="false">Clique aqui</button>
 ```
 
-This will compile your project and store the build artifacts in the `dist/` directory. By default, the production build optimizes your application for performance and speed.
+## 📌 Event Binding
 
-## Running unit tests
+Captura eventos no template e chama métodos no componente:
 
-To execute unit tests with the [Karma](https://karma-runner.github.io) test runner, use the following command:
-
-```bash
-ng test
+```html
+<button (click)="exibirMensagem()">Clique Aqui</button>
 ```
 
-## Running end-to-end tests
+## 📌 Two-way Data Binding
 
-For end-to-end (e2e) testing, run:
+Permite que o modelo e a interface do usuário fiquem sincronizados:
 
-```bash
-ng e2e
+```html
+<input [(ngModel)]="titulo" />
+<p>O título é: {{ titulo }}</p>
 ```
 
-Angular CLI does not come with an end-to-end testing framework by default. You can choose one that suits your needs.
+> **Obs:** Para usar `ngModel`, importe o `FormsModule` no módulo (`app.module.ts`).
 
-## Additional Resources
+## 📌 Input e Output
 
-For more information on using the Angular CLI, including detailed command references, visit the [Angular CLI Overview and Command Reference](https://angular.dev/tools/cli) page.
+- **@Input()** → Recebe dados de um componente pai.
+- **@Output()** → Envia eventos para o componente pai.
+
+### Exemplo de **@Input()**
+
+```ts
+import { Component, Input } from "@angular/core";
+
+@Component({
+  selector: "app-filho",
+  template: `<p>Mensagem do Pai: {{ mensagem }}</p>`,
+})
+export class FilhoComponent {
+  @Input() mensagem: string = "";
+}
+```
+
+```html
+<app-filho [mensagem]="'Olá, filho!'"></app-filho>
+```
+
+### Exemplo de **@Output()**
+
+```ts
+import { Component, Output, EventEmitter } from "@angular/core";
+
+@Component({
+  selector: "app-filho",
+  template: `<button (click)="enviarEvento()">Enviar</button>`,
+})
+export class FilhoComponent {
+  @Output() eventoPai = new EventEmitter<string>();
+
+  enviarEvento() {
+    this.eventoPai.emit("Mensagem do Filho!");
+  }
+}
+```
+
+```html
+<app-filho (eventoPai)="receberMensagem($event)"></app-filho>
+```
+
+```ts
+receberMensagem(mensagem: string) {
+  console.log(mensagem);
+}
+```
+
+## 📌 Ciclo de Vida do Componente
+
+Os métodos mais utilizados são:
+
+- `ngOnInit()` → Executado após a criação do componente.
+- `ngOnDestroy()` → Chamado antes do componente ser destruído.
+
+```ts
+import { Component, OnInit, OnDestroy } from "@angular/core";
+
+@Component({
+  selector: "app-exemplo",
+  template: `<p>Exemplo de ciclo de vida</p>`,
+})
+export class ExemploComponent implements OnInit, OnDestroy {
+  ngOnInit() {
+    console.log("Componente iniciado!");
+  }
+
+  ngOnDestroy() {
+    console.log("Componente destruído!");
+  }
+}
+```
+
+## 📌 Diretivas Úteis
+
+- `*ngIf` → Renderiza um elemento com base em uma condição.
+- `*ngFor` → Itera sobre uma lista.
+
+```html
+<p *ngIf="mostrar">Este texto é condicional.</p>
+
+<ul>
+  <li *ngFor="let item of lista">{{ item }}</li>
+</ul>
+```
+
+---

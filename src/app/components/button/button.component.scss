@@ -1,0 +1,26 @@
+.button {
+  width: 100%;
+  font-size: 16px;
+  text-align: center;
+  margin-top: 10px;
+  border-radius: 25px;
+  font-weight: bold;
+  padding: 10px;
+  border: none;
+  cursor: pointer;
+
+  // animação de click no button
+  position: relative;
+  &:active {
+    bottom: -2px;
+  }
+
+  // criando classe para trocar a cor do button
+  &--white {
+    background-color: white;
+  }
+
+  &--purple {
+    background-color: #a056d9;
+  }
+}
