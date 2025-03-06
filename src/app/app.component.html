@@ -11,3 +11,21 @@
 <h1>Nome:</h1>
 <input type="text" [(ngModel)]="name">
 <h1>Nome digitado: {{ name }}</h1>
+
+<!-- NgIf -->
+<hr>
+<h1>NgIf</h1>
+<div style="background-color: green;" *ngIf="minhaProp; else meuTemplate">Sou uma div</div>
+<ng-template #meuTemplate>
+  <div style="background-color: red;">Sou uma div no template</div>
+</ng-template>
+<button (click)="toggleProp()">Toggle</button>
+
+<ng-template #meuTemplate2>
+  <div style="background-color: blue;">Meu template no then</div>
+</ng-template>
+<ng-template #meuTemplate3>
+  <div style="background-color: purple;">Meu template no else</div>
+</ng-template>
+<ng-container *ngIf="minhaProp2; then meuTemplate2; else meuTemplate3"></ng-container>
+<button (click)="toggleContainer()">Toggle Container</button>

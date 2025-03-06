@@ -13,4 +13,16 @@ export class AppComponent {
   }
 
   name: string = 'Maria';
+
+  // NgIf
+  minhaProp = true;
+  minhaProp2 = true;
+
+  toggleProp() {
+    this.minhaProp = !this.minhaProp;
+  }
+
+  toggleContainer() {
+    this.minhaProp2 = !this.minhaProp2;
+  }
 }
