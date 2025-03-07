@@ -45,20 +45,19 @@
 <hr />
 <h1>NgFor</h1>
 <div class="list">
-  <div
-    class="item"
+  <app-person
     *ngFor="
       let person of listPeople;
       let i = index;
-      let isOdd = odd;
-      let isLast = last
+      let isLast = last;
+      let isOdd = odd
     "
-    [class.item--odd]="isOdd"
-    [class.item--highlighted]="personSelectedIndex === i"
-    (click)="selectPerson(i)"
-  >
-    <p class="item__name">{{ i }} - {{ person.name }}</p>
-    <p class="item__age">{{ person.age }} anos</p>
-    <p class="item__age" *ngIf="isLast">Último item</p>
-  </div>
+    [personName]="person.name"
+    [personAge]="person.age"
+    [personIndex]="i"
+    [isLast]="isLast"
+    [isOdd]="isOdd"
+    [isSelected]="personSelectedIndex === i"
+    (onPersonSelectEmitt)="selectPerson($event)"
+  ></app-person>
 </div>
