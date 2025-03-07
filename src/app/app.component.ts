@@ -39,4 +39,23 @@ export class AppComponent {
     console.log(index);
     this.personSelectedIndex = index;
   }
+
+  // NgStyle
+  fontSize: number = 15;
+  textColor: 'white' | 'orange' = 'white';
+  buttonText: 'Branco' | 'Laranja' = 'Laranja';
+
+  increaseFontSize() {
+    this.fontSize++;
+  }
+
+  toggleFontColor() {
+    if (this.textColor === 'white') {
+      this.textColor = 'orange';
+      this.buttonText = 'Branco';
+    } else {
+      this.textColor = 'white';
+      this.buttonText = 'Laranja';
+    }
+  }
 }

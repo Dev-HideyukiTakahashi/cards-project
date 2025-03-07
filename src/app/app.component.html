@@ -61,3 +61,13 @@
     (onPersonSelectEmitt)="selectPerson($event)"
   ></app-person>
 </div>
+
+<!-- NgStyle-->
+<hr />
+<h1>NgStyle</h1>
+<h2 [ngStyle]="{ 'font-size': fontSize + 'px', color: textColor }">
+  Estilizando um H2
+</h2>
+
+<button (click)="increaseFontSize()">+A</button>
+<button (click)="toggleFontColor()">{{ buttonText }}</button>
