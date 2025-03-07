@@ -58,4 +58,8 @@ export class AppComponent {
       this.buttonText = 'Laranja';
     }
   }
+
+  // Pipe
+  text: string = 'Texto uppercase com pipe';
+  pessoa = { name: 'Maria' };
 }
